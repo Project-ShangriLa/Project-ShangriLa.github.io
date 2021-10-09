@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>サ活グラフ</title>
+
+    <!-- Load required Bootstrap and BootstrapVue CSS -->
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
+    <!-- Load polyfills to support older browsers -->
+    <script src="//polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+    <!-- Load the following for BootstrapVueIcons support -->
+    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue-icons.min.js"></script>
+</head>
+<body>
+<div id="app" class="container-fluid">
+    <h1>サ活グラフ</h1>
+    <p>行った日付<input v-model="goDate" placeholder="日付" type="date" class="form-control form-control-lg"></p>
+    <p>施設名<input v-model="shopName" placeholder="施設名" class="form-control form-control-lg"></p>
+    <div class="row">
+        <div class="col"><p>サウナ1回目(分数)<input v-model="time1" placeholder="1回目" type="number" class="form-control form-control-lg"></p></div>
+        <div class="col"><p>サウナ2回目(分数)<input v-model="time2" placeholder="2回目" type="number" class="form-control form-control-lg"></p></div>
+        <div class="col"><p>サウナ3回目(分数)<input v-model="time3" placeholder="3回目" type="number" class="form-control form-control-lg"></p></div>
+    </div>
+    <div class="row">
+        <div class="col"><p>水風呂1回目(秒数)<input v-model="cool1" placeholder="1回目" type="number" class="form-control form-control-lg"></p></div>
+        <div class="col"><p>水風呂2回目(秒数)<input v-model="cool2" placeholder="2回目" type="number" class="form-control form-control-lg"></p></div>
+        <div class="col"><p>水風呂3回目(秒数)<input v-model="cool3" placeholder="3回目" type="number" class="form-control form-control-lg"></p></div>
+    </div>
+    <p><button @click="displayGraph" type="button" class="btn btn-primary btn-lg">グラフ表示</button></p>
+    <p><a id="download" @click="gDownload" href="#" download="sauna.png" class="btn btn-secondary btn-lg active" role="button">ダウンロード</a></p>
+    <div style="width:600px">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+
+<script>
+
+    Chart.plugins.register({
+        beforeDraw: function(c){
+            var ctx = c.chart.ctx;
+            ctx.fillStyle = "rgb(255,255,255)";
+            ctx.fillRect(0, 0, c.chart.width, c.chart.height);
+        }
+    });
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            shopName:"",
+            goDate: "",
+            time1:0,
+            time2:0,
+            time3:0,
+            cool1:0,
+            cool2:0,
+            cool3:0
+        },
+        methods:{
+            displayGraph: function(){
+                var ctx = document.getElementById('myChart').getContext('2d');
+                //ctx.fillStyle = 'rgb(255, 255, 255)';
+                //ctx.fillRect(0, 0, ctx.width, ctx.height);
+
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['1回目', '2回目', '3回目'],
+                        datasets: [
+                            {
+                                yAxisID: 'y-axis-1',
+                                label: 'サウナ時間(分)',
+                                data: [app.time1, app.time2, app.time3],
+                                backgroundColor: 'rgb(255, 99, 132)',
+                                borderColor: 'rgb(255, 99, 132)',
+                             },
+                            {
+                                yAxisID: 'y-axis-2',
+                                label: '水風呂(秒)',
+                                data: [app.cool1, app.cool2, app.cool3],
+                                backgroundColor: 'rgb(51,116,255)',
+                                borderColor: 'rgba(0,2,255,0.98)',
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text:  "施設名: " + app.shopName + " | 行った日: " + app.goDate + " | サ活グラフ by http://akibalab.info/sauna.html",
+                        },
+                        scales: {
+                            yAxes: [{
+                                display: true,
+                                position: 'left',
+                                id: 'y-axis-1',
+                                ticks: {
+                                    min: 0,
+                                    max: Math.max(app.time1, app.time2, app.time3),
+                                    fontColor: 'rgb(255, 99, 132)',
+                                }
+                            }, {
+                                display: true,
+                                position: 'right',
+                                id: 'y-axis-2',
+                                ticks: {
+                                    min: 0,
+                                    max: Math.max(app.cool1, app.cool2, app.cool3),
+                                    fontColor: 'rgba(0,2,255,0.98)'
+                                }
+                            }]
+                        }
+                    }
+                });
+            },
+            gDownload: function(){
+                canvas = document.getElementById('myChart');
+                let base64 = canvas.toDataURL("image/jpeg");
+                document.getElementById("download").href = base64;
+            }
+        }
+    });
+</script>
+</body>
+</html>
