@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <div>
+        見る予定の2022夏アニメを選んでください<br>
+        <button type="button" class="btn btn-warning">
+            選択している数 <span id="selectCount" class="badge bg-secondary">0</span>
+        </button>
+        <br>
+        画像出力ボタン<br>
+    </div>
+    <div class="list-group">
+        <button type="button" class="list-group-item list-group-item-action">iiiあいすくりん2</button>
+        <button type="button" class="list-group-item list-group-item-action">異世界おじさん</button>
+        <button type="button" class="list-group-item list-group-item-action">異世界迷宮でハーレムを</button>
+        <button type="button" class="list-group-item list-group-item-action">異世界薬局</button>
+        <button type="button" class="list-group-item list-group-item-action">うたの☆プリンスさまっ♪ マジLOVEスターリッシュツアーズ ～旅の始まり～</button>
+        <button type="button" class="list-group-item list-group-item-action">うたわれるもの 二人の白皇</button>
+        <button type="button" class="list-group-item list-group-item-action">Extreme Hearts</button>
+        <button type="button" class="list-group-item list-group-item-action">Engage Kiss</button>
+        <button type="button" class="list-group-item list-group-item-action">オーバーロードIV</button>
+        <button type="button" class="list-group-item list-group-item-action">オリエント 淡路島激闘編</button>
+        <button type="button" class="list-group-item list-group-item-action">カードファイト!! ヴァンガード will+Dress</button>
+        <button type="button" class="list-group-item list-group-item-action">賭ケグルイ双</button>
+        <button type="button" class="list-group-item list-group-item-action">彼女、お借りします 第2期</button>
+        <button type="button" class="list-group-item list-group-item-action">神クズ☆アイドル</button>
+        <button type="button" class="list-group-item list-group-item-action">金装のヴェルメイユ～崖っぷち魔術師は最強の厄災と魔法世界を突き進む～</button>
+        <button type="button" class="list-group-item list-group-item-action">組長娘と世話係</button>
+        <button type="button" class="list-group-item list-group-item-action">黒の召喚士</button>
+        <button type="button" class="list-group-item list-group-item-action">5億年ボタン～菅原そうたのショートショート～</button>
+        <button type="button" class="list-group-item list-group-item-action">最近雇ったメイドが怪しい</button>
+        <button type="button" class="list-group-item list-group-item-action">シャインポスト</button>
+        <button type="button" class="list-group-item list-group-item-action">邪神ちゃんドロップキックX</button>
+        <button type="button" class="list-group-item list-group-item-action">シャドーハウス 2nd Season</button>
+        <button type="button" class="list-group-item list-group-item-action">シュート！Goal to the Future</button>
+        <button type="button" class="list-group-item list-group-item-action">新テニスの王子様 U-17 WORLD CUP</button>
+        <button type="button" class="list-group-item list-group-item-action">世界の終わりに柴犬と</button>
+        <button type="button" class="list-group-item list-group-item-action">それでも歩は寄せてくる</button>
+        <button type="button" class="list-group-item list-group-item-action">ダンジョンに出会いを求めるのは間違っているだろうかⅣ 新章 迷宮篇</button>
+        <button type="button" class="list-group-item list-group-item-action">ちみも</button>
+        <button type="button" class="list-group-item list-group-item-action">てっぺんっ!!!!!!!!!!!!!!!</button>
+        <button type="button" class="list-group-item list-group-item-action">転生賢者の異世界ライフ ～第二の職業を得て、世界最強になりました～</button>
+        <button type="button" class="list-group-item list-group-item-action">東京ミュウミュウ にゅ～♡</button>
+        <button type="button" class="list-group-item list-group-item-action">Dr.STONE 龍水</button>
+        <button type="button" class="list-group-item list-group-item-action">BASTARD!!―暗黒の破壊神―</button>
+        <button type="button" class="list-group-item list-group-item-action">はたらく魔王さま！！</button>
+        <button type="button" class="list-group-item list-group-item-action">ハナビちゃんは遅れがち</button>
+        <button type="button" class="list-group-item list-group-item-action">BanG Dream! Morfonication</button>
+        <button type="button" class="list-group-item list-group-item-action">風都探偵</button>
+        <button type="button" class="list-group-item list-group-item-action">ブッチギレ！</button>
+        <button type="button" class="list-group-item list-group-item-action">プリマドール</button>
+        <button type="button" class="list-group-item list-group-item-action">惑星のさみだれ</button>
+        <button type="button" class="list-group-item list-group-item-action">継母の連れ子が元カノだった</button>
+        <button type="button" class="list-group-item list-group-item-action">むさしの！</button>
+        <button type="button" class="list-group-item list-group-item-action">メイドインアビス 烈日の黄金郷</button>
+        <button type="button" class="list-group-item list-group-item-action">森のくまさん、冬眠中。</button>
+        <button type="button" class="list-group-item list-group-item-action">ユーレイデコ</button>
+        <button type="button" class="list-group-item list-group-item-action">ようこそ実力至上主義の教室へ 2nd Season</button>
+        <button type="button" class="list-group-item list-group-item-action">よふかしのうた</button>
+        <button type="button" class="list-group-item list-group-item-action">夜は猫といっしょ</button>
+        <button type="button" class="list-group-item list-group-item-action">ラブライブ！スーパースター!! 第2期</button>
+        <button type="button" class="list-group-item list-group-item-action">リコリス・リコイル</button>
+        <button type="button" class="list-group-item list-group-item-action">RWBY 氷雪帝国</button>
+        <button type="button" class="list-group-item list-group-item-action">連盟空軍航空魔法音楽隊ルミナスウィッチーズ</button>
+        <button type="button" class="list-group-item list-group-item-action">ROLY POLY PEOPLES</button>
+        <button type="button" class="list-group-item list-group-item-action">咲う アルスノトリア すんっ！</button>
+    </div>
+    <canvas id="selectDraw"></canvas>
+    <script>
+        var selectCount=0;
+        let targets = document.getElementsByClassName("list-group-item");
+        for (let i = 0; i < targets.length; i++) {
+            targets[i].addEventListener("click", () => {
+                var t = targets[i]
+                if (t.classList.contains('active')) {
+                    t.classList.remove("active");
+                    selectCount--;
+                } else {
+                    t.classList.add("active");
+                    selectCount++;
+                }
+                console.log(selectCount);
+                //console.log(targets[i].textContent)
+                document.getElementById('selectCount').innerHTML = selectCount;
+            }, false);
+        }
+
+        function draw() {
+            // TODO 横サイズを変更する
+            var ctx = document.getElementById('selectDraw').getContext('2d');
+            ctx.font = '18px serif';
+            //ctx.fillText('よふかしのうた', 10, 50);
+            //ctx.fillText('ラブライブ', 10, 72);
+            var position = 50;
+            var addPosition = 18;
+            const targets = document.querySelectorAll('.active');
+            targets.forEach(function(el) {
+                //console.log(el.textContent);
+                ctx.fillText(el.textContent, 10, position);
+                position+=addPosition;
+            })
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
