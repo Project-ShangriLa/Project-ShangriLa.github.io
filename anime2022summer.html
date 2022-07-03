@@ -76,9 +76,10 @@
         <button type="button" class="list-group-item list-group-item-action">ROLY POLY PEOPLES</button>
         <button type="button" class="list-group-item list-group-item-action">咲う アルスノトリア すんっ！</button>
     </div>
-    <canvas id="selectDraw" style="display: none;"></canvas>
+    <canvas id="selectDraw" width="700" style="display: none;"></canvas>
     <script>
         var selectCount=0;
+        var clipboardText = ""
         let targets = document.getElementsByClassName("list-group-item");
         for (let i = 0; i < targets.length; i++) {
             targets[i].addEventListener("click", () => {
@@ -97,25 +98,34 @@
         }
 
         function drawImage() {
-            // TODO 横サイズを変更する
+
+            // TODO 縦サイズを選択数に応じて変更する
             var ctx = document.getElementById('selectDraw').getContext('2d');
             ctx.font = '18px serif';
             //ctx.fillText('よふかしのうた', 10, 50);
             //ctx.fillText('ラブライブ', 10, 72);
             var position = 50;
             var addPosition = 18;
+            var addPosition2 = 22;
             const targets = document.querySelectorAll('.active');
+            adjustHeight = (targets.length + 1 ) * addPosition2;
+            console.log(adjustHeight);
+            console.log(document.getElementById('selectDraw').height);
+            document.getElementById('selectDraw').height = adjustHeight;
+
             targets.forEach(function(el) {
                 //console.log(el.textContent);
                 ctx.fillText(el.textContent, 10, position);
                 position+=addPosition;
             })
+            document.getElementById('main').innerHTML = "";
+            document.getElementById("selectDraw").style.display ="block";
+            
         }
 
         function drawText() {
             const targets = document.querySelectorAll('.active');
             var text = ""
-            var clipboardText = ""
             targets.forEach(function(el) {
                 text = text + el.textContent + "<br>";
                 clipboardText = clipboardText + el.textContent + '\r\n'
@@ -124,17 +134,20 @@
             document.getElementById('main').innerHTML = text;
 
             let copyTextButton = document.getElementById('copyText');
-            copyTextButton.addEventListener('click', copyText(clipboardText));
+            copyTextButton.addEventListener('click', copyText);
         }
 
-        function copyText(str) {
+        function copyText() {
             if(navigator.clipboard){
-                navigator.clipboard.writeText(str);
+                navigator.clipboard.writeText(clipboardText);
             }
         }
 
         let drawTextButton = document.getElementById('drawTextButton');
         drawTextButton.addEventListener('click', drawText);
+
+        let drawImageButton = document.getElementById('drawImageButton');
+        drawImageButton.addEventListener('click', drawImage);
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
