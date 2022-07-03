@@ -76,7 +76,7 @@
         <button type="button" class="list-group-item list-group-item-action">ROLY POLY PEOPLES</button>
         <button type="button" class="list-group-item list-group-item-action">咲う アルスノトリア すんっ！</button>
     </div>
-    <canvas id="selectDraw" width="700" style="display: none;"></canvas>
+    <canvas id="selectDraw" style="display: none;"></canvas>
     <script>
         var selectCount=0;
         var clipboardText = ""
@@ -101,17 +101,25 @@
 
             // TODO 縦サイズを選択数に応じて変更する
             var ctx = document.getElementById('selectDraw').getContext('2d');
-            ctx.font = '18px serif';
+
             //ctx.fillText('よふかしのうた', 10, 50);
             //ctx.fillText('ラブライブ', 10, 72);
-            var position = 50;
+            var position = 30;
             var addPosition = 18;
             var addPosition2 = 22;
+            var adjustWidth = 700;
             const targets = document.querySelectorAll('.active');
             adjustHeight = (targets.length + 1 ) * addPosition2;
             console.log(adjustHeight);
             console.log(document.getElementById('selectDraw').height);
+            document.getElementById('selectDraw').width = adjustWidth;
             document.getElementById('selectDraw').height = adjustHeight;
+
+            ctx.fillStyle = "#FFFFFF";// 背景を白に
+            ctx.fillRect(0,0, adjustWidth, adjustHeight);
+            ctx.fillStyle = "#000000";
+            ctx.font = '18px serif';
+
 
             targets.forEach(function(el) {
                 //console.log(el.textContent);
@@ -121,6 +129,11 @@
             document.getElementById('main').innerHTML = "";
             document.getElementById("selectDraw").style.display ="block";
             
+            var appendButton = '<a id="downloadImageButton" href="#" download="anime2022summer.png"><button type="button" class="btn btn-primary">画像をダウンロード</button></a>'
+            document.getElementById('main').innerHTML = appendButton;
+
+            let downloadImageButton = document.getElementById('downloadImageButton');
+            downloadImageButton.addEventListener('click', downloadImage);
         }
 
         function drawText() {
@@ -141,6 +154,12 @@
             if(navigator.clipboard){
                 navigator.clipboard.writeText(clipboardText);
             }
+        }
+
+        function downloadImage(){
+                canvas = document.getElementById('selectDraw');
+                let base64 = canvas.toDataURL("image/png");
+                document.getElementById("downloadImageButton").href = base64;
         }
 
         let drawTextButton = document.getElementById('drawTextButton');
