@@ -2,21 +2,25 @@
 <html>
 
 <head>
+    <title>2022年夏アニメ 見る予定リスト作成</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
-    <div>
-        見る予定の2022夏アニメを選んでください<br>
-        <button type="button" class="btn btn-warning">
-            選択している数 <span id="selectCount" class="badge bg-secondary">0</span>
-        </button>
-        <br>
-        画像出力ボタン<br>
-    </div>
-    <div class="list-group">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div>
+            見る予定の2022夏アニメを選んでください<br>
+            <button type="button" class="btn btn-warning">
+                選択している数 <span id="selectCount" class="badge bg-secondary">0</span>
+            </button>
+            <button id="drawImageButton" type="button" class="btn btn-success">画像出力</button>
+            <button id="drawTextButton" type="button" class="btn btn-info">テキスト出力</button>
+        </div>
+    </nav>
+    
+    <div id="main" class="list-group">
         <button type="button" class="list-group-item list-group-item-action">iiiあいすくりん2</button>
         <button type="button" class="list-group-item list-group-item-action">異世界おじさん</button>
         <button type="button" class="list-group-item list-group-item-action">異世界迷宮でハーレムを</button>
@@ -72,7 +76,7 @@
         <button type="button" class="list-group-item list-group-item-action">ROLY POLY PEOPLES</button>
         <button type="button" class="list-group-item list-group-item-action">咲う アルスノトリア すんっ！</button>
     </div>
-    <canvas id="selectDraw"></canvas>
+    <canvas id="selectDraw" style="display: none;"></canvas>
     <script>
         var selectCount=0;
         let targets = document.getElementsByClassName("list-group-item");
@@ -92,7 +96,7 @@
             }, false);
         }
 
-        function draw() {
+        function drawImage() {
             // TODO 横サイズを変更する
             var ctx = document.getElementById('selectDraw').getContext('2d');
             ctx.font = '18px serif';
@@ -107,6 +111,20 @@
                 position+=addPosition;
             })
         }
+
+        function drawText() {
+            const targets = document.querySelectorAll('.active');
+            var text = ""
+            targets.forEach(function(el) {
+                text = text + el.textContent + "<br>";
+            })
+            document.getElementById('main').innerHTML = text;
+        }
+
+
+        let drawTextButton = document.getElementById('drawTextButton');
+        drawTextButton.addEventListener('click', drawText);
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
