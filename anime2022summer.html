@@ -115,12 +115,23 @@
         function drawText() {
             const targets = document.querySelectorAll('.active');
             var text = ""
+            var clipboardText = ""
             targets.forEach(function(el) {
                 text = text + el.textContent + "<br>";
+                clipboardText = clipboardText + el.textContent + '\r\n'
             })
+            text = text + '<button id="copyText" type="button" class="btn btn-primary">クリップボードにコピー</button>'
             document.getElementById('main').innerHTML = text;
+
+            let copyTextButton = document.getElementById('copyText');
+            copyTextButton.addEventListener('click', copyText(clipboardText));
         }
 
+        function copyText(str) {
+            if(navigator.clipboard){
+                navigator.clipboard.writeText(str);
+            }
+        }
 
         let drawTextButton = document.getElementById('drawTextButton');
         drawTextButton.addEventListener('click', drawText);
